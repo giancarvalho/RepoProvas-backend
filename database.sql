@@ -16,7 +16,7 @@ CREATE TABLE "exams" (
 
 CREATE TABLE "semesters" (
 	"id" serial NOT NULL,
-	"semester" integer NOT NULL,
+	"semester" varchar(255) NOT NULL,
 	CONSTRAINT "semesters_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -71,11 +71,15 @@ ALTER TABLE "exams" ADD CONSTRAINT "exams_fk3" FOREIGN KEY ("teacher_id") REFERE
 ALTER TABLE "exams" ADD CONSTRAINT "exams_fk4" FOREIGN KEY ("subject_id") REFERENCES "subjects"("id");
 
 
+INSERT INTO types (name) VALUES ('P1'), ('P2'), ('P3'), ('2CH'), ('Outras');
 
+INSERT INTO subjects (name) VALUES ('Algoritmos 2'), ('Algoritmos 1'), ('Arquiteturas de Software'), ('Cálculo 1'), ('Cálculo 2'), ('Desenvolvimento Web'), ('Machine Learning');
 
+INSERT INTO semesters (semester) VALUES ('1'), ('2'), ('3'), ('4'), ('Eletivas');
 
+INSERT INTO years (year) VALUES (2014), ('2015'), ('2016'), ('2017'), ('2018'), ('2019'), ('2020'), ('2021');
 
-
+INSERT INTO teachers (name) VALUES ('João Dória'), ('Inácio Lula'), ('Eduardo Jorge'), ('Marina Silva'), ('Fernando Cardoso'), ('Dilma Rouseff');
 
 
 

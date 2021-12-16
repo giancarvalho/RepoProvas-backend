@@ -14,8 +14,12 @@ app.use(express.json());
 
 app.get("/users", userController.getUsers);
 
-export async function init () {
-  await connectDatabase();
+app.get("/health", async (req, res) => {
+    res.sendStatus(200);
+});
+
+export async function init() {
+    await connectDatabase();
 }
 
 export default app;

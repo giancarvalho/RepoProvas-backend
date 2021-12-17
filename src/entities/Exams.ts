@@ -5,7 +5,7 @@ import {
     OneToOne,
     JoinColumn,
 } from "typeorm";
-import TeacherSubject from "./TeacherSubject";
+
 import Year from "./Years";
 
 @Entity("exams")

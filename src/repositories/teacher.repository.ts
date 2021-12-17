@@ -20,4 +20,14 @@ async function getAll() {
     return result;
 }
 
-export { getBySubject, getAll };
+async function getOneWithExams(teacherId: number) {
+    const result = await getRepository(Teacher).find({
+        where: [{ id: teacherId }],
+    });
+
+    console.log(result);
+
+    return result;
+}
+
+export { getBySubject, getAll, getOneWithExams };

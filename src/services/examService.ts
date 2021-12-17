@@ -2,6 +2,7 @@ import examSchema from "../schemas/exam.schema";
 import { BadRequest, Conflict } from "../utils/Errors";
 import { iExam } from "../protocols/exams.interface";
 import * as examRepository from "../repositories/exam.repository";
+import * as teacherRepository from "../repositories/teacher.repository";
 
 async function create(examData: iExam) {
     const { error } = examSchema.validate(examData);
@@ -20,4 +21,18 @@ async function create(examData: iExam) {
     return examRepository.insert(examData);
 }
 
-export { create };
+async function getByTeacher(teacherId: number) {
+    const teacher = await teacherRepository.getOneWithExams(teacherId);
+
+    return teacher[0].exams.map((exam) => {
+        return {
+            name: exam.name,
+            type: exam.typeId,
+            link: exam.link,
+            year: exam.year.year,
+            semester: exam.semesterId,
+        };
+    });
+}
+
+export { create, getByTeacher };

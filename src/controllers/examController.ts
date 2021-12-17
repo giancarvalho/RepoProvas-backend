@@ -14,4 +14,22 @@ async function postExam(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-export { postExam };
+async function getExamByTeacher(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const { teacherId } = req.params;
+
+    try {
+        const getExamsRequest = await examService.getByTeacher(
+            Number(teacherId)
+        );
+
+        res.send(getExamsRequest);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { postExam, getExamByTeacher };

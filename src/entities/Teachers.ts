@@ -6,6 +6,7 @@ import {
     JoinTable,
 } from "typeorm";
 import Subject from "./Subject";
+import Exam from "./Exams";
 
 @Entity("teachers")
 export default class Teacher {
@@ -28,4 +29,18 @@ export default class Teacher {
         },
     })
     subjects: Subject[];
+
+    @ManyToMany(() => Exam, (exam) => exam.teacherSubjectId, { eager: true })
+    @JoinTable({
+        name: "teachers_subjects",
+        joinColumn: {
+            name: "teacher_id",
+            referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+            name: "id",
+            referencedColumnName: "teacherSubjectId",
+        },
+    })
+    exams: Exam[];
 }

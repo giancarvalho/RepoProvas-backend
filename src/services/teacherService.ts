@@ -6,4 +6,16 @@ async function getBySubject(subjectId: number) {
     return teachers[0];
 }
 
-export { getBySubject };
+async function getAll() {
+    const teachers = await teacherRepository.getAll();
+
+    return teachers.map((teacher) => {
+        return {
+            id: teacher.id,
+            name: teacher.name,
+            examsRegistered: teacher.exams.length,
+        };
+    });
+}
+
+export { getBySubject, getAll };

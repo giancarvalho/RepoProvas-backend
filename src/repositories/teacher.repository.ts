@@ -1,13 +1,23 @@
 import { getRepository } from "typeorm";
 import Subject from "../entities/Subject";
+import Teacher from "../entities/Teachers";
+import TeacherSubject from "../entities/TeacherSubject";
 
 async function getBySubject(subjectId: number) {
-    const teachers = await getRepository(Subject).find({
+    const result = await getRepository(Subject).find({
         where: [{ id: subjectId }],
         relations: ["teachers"],
     });
 
-    return teachers;
+    return result;
 }
 
-export { getBySubject };
+async function getAll() {
+    const result = await getRepository(Teacher).find();
+
+    console.log(result);
+
+    return result;
+}
+
+export { getBySubject, getAll };

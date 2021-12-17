@@ -19,4 +19,14 @@ async function getTeachersBySubject(
     }
 }
 
-export { getTeachersBySubject };
+async function getTeachers(req: Request, res: Response, next: NextFunction) {
+    try {
+        const getTeachersRequest = await teacherService.getAll();
+
+        return res.send(getTeachersRequest);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { getTeachersBySubject, getTeachers };

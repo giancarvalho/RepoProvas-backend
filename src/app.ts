@@ -3,19 +3,20 @@ import "./setup";
 import express from "express";
 import cors from "cors";
 import "reflect-metadata";
-
+import handleErrors from "./middlewares/handleError.middeware";
 import connectDatabase from "./database";
-
-import * as userController from "./controllers/userConroller";
+import examRoute from "./routes/examRoute";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/users", userController.getUsers);
+app.use("/exams", examRoute);
 
-export async function init () {
-  await connectDatabase();
+app.use(handleErrors);
+
+export async function init() {
+    await connectDatabase();
 }
 
 export default app;

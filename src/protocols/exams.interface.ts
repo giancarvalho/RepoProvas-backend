@@ -4,8 +4,7 @@ interface iExam {
     typeId: number;
     semesterId: number;
     yearId: number;
-    teacherId: number;
-    subjectId: number;
+    teacherSubjectId: number;
 }
 
 export { iExam };

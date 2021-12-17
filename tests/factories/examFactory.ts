@@ -8,8 +8,7 @@ function createFakeExam() {
         typeId: 2,
         semesterId: 2,
         yearId: 2,
-        teacherId: 2,
-        subjectId: 2,
+        teacherSubjectId: 2,
     };
 
     return newExam;

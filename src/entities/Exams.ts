@@ -20,9 +20,6 @@ export default class Exam {
     @Column({ name: "year_id" })
     yearId: number;
 
-    @Column({ name: "teacher_id" })
-    teacherId: number;
-
-    @Column({ name: "subject_id" })
-    subjectId: number;
+    @Column({ name: "teachers_subjects_id" })
+    teacherSubjectId: number;
 }

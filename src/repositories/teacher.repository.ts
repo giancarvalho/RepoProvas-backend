@@ -15,8 +15,6 @@ async function getBySubject(subjectId: number) {
 async function getAll() {
     const result = await getRepository(Teacher).find();
 
-    console.log(result);
-
     return result;
 }
 
@@ -24,8 +22,6 @@ async function getOneWithExams(teacherId: number) {
     const result = await getRepository(Teacher).find({
         where: [{ id: teacherId }],
     });
-
-    console.log(result);
 
     return result;
 }

@@ -22,9 +22,13 @@ async function getExamByTeacher(
     const { teacherId } = req.params;
 
     try {
-        const getExamsRequest = await examService.getByTeacher(
-            Number(teacherId)
-        );
+        const id = Number(teacherId);
+
+        if (!id) {
+            return res.sendStatus(400);
+        }
+
+        const getExamsRequest = await examService.getByTeacher(id);
 
         res.send(getExamsRequest);
     } catch (error) {

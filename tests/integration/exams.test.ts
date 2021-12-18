@@ -6,6 +6,11 @@ import createFakeExam from "../factories/examFactory";
 
 import { clearDatabase } from "../utils/database";
 import * as examRepository from "../../src/repositories/exam.repository";
+import getATeacher from "../factories/teacherFactory";
+
+beforeAll(async () => {
+    await init();
+});
 
 afterAll(async () => {
     await clearDatabase();
@@ -15,12 +20,10 @@ afterAll(async () => {
     await getConnection().close();
 });
 
-describe("GET /users", () => {
+describe("POST /exams", () => {
     const conflictingExam = createFakeExam();
 
     beforeAll(async () => {
-        await init();
-
         await examRepository.insert({ ...conflictingExam });
     });
 
@@ -48,5 +51,24 @@ describe("GET /users", () => {
             .send(conflictingExam);
 
         expect(response.status).toBe(409);
+    });
+});
+
+describe("GET /exams/teacher/:teacherId", () => {
+    it("should return an object with the teachers name and array of exams", async () => {
+        const teacher = await getATeacher();
+
+        const response = await supertest(app).get(
+            `/exams/teacher/${teacher.id}`
+        );
+
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).toHaveProperty("exams");
+    });
+
+    it("should return status 400 if a number is not send as a parameter", async () => {
+        const response = await supertest(app).get(`/exams/teacher/:teacherId`);
+
+        expect(response.status).toBe(400);
     });
 });

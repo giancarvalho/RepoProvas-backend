@@ -30,7 +30,7 @@ export default class Teacher {
     })
     subjects: Subject[];
 
-    @ManyToMany(() => Exam, (exam) => exam.teacherSubjectId, { eager: true })
+    @ManyToMany(() => Exam, (exam) => exam.teacherSubjectId)
     @JoinTable({
         name: "teachers_subjects",
         joinColumn: {

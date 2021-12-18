@@ -21,6 +21,7 @@ async function getAll() {
 async function getOneWithExams(teacherId: number) {
     const result = await getRepository(Teacher).find({
         where: [{ id: teacherId }],
+        relations: ["exams"],
     });
 
     return result;

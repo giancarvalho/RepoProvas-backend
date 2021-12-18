@@ -4,8 +4,11 @@ import {
     Column,
     ManyToMany,
     JoinTable,
+    OneToOne,
+    JoinColumn,
 } from "typeorm";
 import Teacher from "./Teachers";
+import Semester from "./Semesters";
 
 @Entity("subjects")
 export default class Subject {
@@ -14,6 +17,13 @@ export default class Subject {
 
     @Column()
     name: string;
+
+    @Column({ name: "semester_id" })
+    semesterId: number;
+
+    @OneToOne(() => Semester, { eager: true })
+    @JoinColumn({ name: "semester_id" })
+    semester: Semester;
 
     @ManyToMany(() => Teacher, (teacher) => teacher.id)
     @JoinTable({

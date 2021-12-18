@@ -13,7 +13,9 @@ async function getBySubject(subjectId: number) {
 }
 
 async function getAll() {
-    const result = await getRepository(Teacher).find();
+    const result = await getRepository(Teacher).find({
+        relations: ["exams"],
+    });
 
     return result;
 }

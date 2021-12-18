@@ -27,9 +27,6 @@ export default class Exam {
     @Column({ name: "type_id" })
     typeId: number;
 
-    @Column({ name: "semester_id" })
-    semesterId: number;
-
     @Column({ name: "year_id" })
     yearId: number;
 
@@ -39,10 +36,6 @@ export default class Exam {
     @OneToOne(() => Year, { eager: true })
     @JoinColumn({ name: "year_id" })
     year: Year;
-
-    @OneToOne(() => Semester, { eager: true })
-    @JoinColumn({ name: "semester_id" })
-    semester: Semester;
 
     @OneToOne(() => Type, { eager: true })
     @JoinColumn({ name: "type_id" })
@@ -67,7 +60,6 @@ export default class Exam {
             name: this.name,
             link: this.link,
             type: this.type.name,
-            semester: this.semester.semester,
             year: this.year.year,
             subject: this.subject[0].name,
         };

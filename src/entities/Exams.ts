@@ -9,9 +9,9 @@ import {
 } from "typeorm";
 
 import Year from "./Years";
-import Semester from "./Semesters";
 import Type from "./Types";
 import Subject from "./Subject";
+import Teacher from "./Teachers";
 
 @Entity("exams")
 export default class Exam {
@@ -41,7 +41,7 @@ export default class Exam {
     @JoinColumn({ name: "type_id" })
     type: Type;
 
-    @ManyToMany(() => Subject, (subject) => subject.id, { eager: true })
+    @ManyToMany(() => Subject, (subject) => subject.id)
     @JoinTable({
         name: "teachers_subjects",
         joinColumn: {
@@ -55,13 +55,37 @@ export default class Exam {
     })
     subject: Subject[];
 
-    getExam() {
+    @ManyToMany(() => Teacher, (teacher) => teacher.id)
+    @JoinTable({
+        name: "teachers_subjects",
+        joinColumn: {
+            name: "id",
+            referencedColumnName: "teacherSubjectId",
+        },
+        inverseJoinColumn: {
+            name: "teacher_id",
+            referencedColumnName: "id",
+        },
+    })
+    teacher: Teacher[];
+
+    getExamWithSubject() {
         return {
             name: this.name,
             link: this.link,
             type: this.type.name,
             year: this.year.year,
             subject: this.subject[0].name,
+        };
+    }
+
+    getExamWithTeacher() {
+        return {
+            name: this.name,
+            link: this.link,
+            type: this.type.name,
+            year: this.year.year,
+            teacher: this.teacher[0].name,
         };
     }
 }

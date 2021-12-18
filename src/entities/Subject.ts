@@ -40,10 +40,25 @@ export default class Subject {
     })
     teachers: Teacher[];
 
-    getSubject() {
+    @ManyToMany(() => Exam, (exam) => exam.teacherSubjectId)
+    @JoinTable({
+        name: "teachers_subjects",
+        joinColumn: {
+            name: "subject_id",
+            referencedColumnName: "id",
+        },
+        inverseJoinColumn: {
+            name: "id",
+            referencedColumnName: "teacherSubjectId",
+        },
+    })
+    exams: Exam[];
+
+    getSubjectWithExamAmount() {
         return {
             name: this.name,
             semester: this.semester.semester,
+            exams: this.exams.length,
         };
     }
 }

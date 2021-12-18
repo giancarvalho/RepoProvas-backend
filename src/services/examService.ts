@@ -29,7 +29,7 @@ async function getByTeacher(teacherId: number) {
     const teacher = findTeacherRequest[0];
     return {
         name: teacher.name,
-        exams: teacher.exams.map((exam) => exam.getExam()),
+        exams: teacher.exams.map((exam) => exam.getExamWithSubject()),
     };
 }
 

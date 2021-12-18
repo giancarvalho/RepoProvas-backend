@@ -59,7 +59,7 @@ export default class Subject {
             id: this.id,
             name: this.name,
             semester: this.semester.semester,
-            exams: this.exams.length,
+            examsRegistered: this.exams.length,
         };
     }
 }

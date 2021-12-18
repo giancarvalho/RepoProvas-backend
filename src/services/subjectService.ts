@@ -9,7 +9,10 @@ async function getAll() {
 async function getOne(subjectId: number) {
     const subjectFound = await subjectRepository.findOne(subjectId);
 
-    return subjectFound.exams.map((exam) => exam.getExamWithTeacher());
+    return {
+        name: subjectFound.name,
+        exams: subjectFound.exams.map((exam) => exam.getExamWithTeacher()),
+    };
 }
 
 export { getAll, getOne };

@@ -24,15 +24,7 @@ async function create(examData: iExam) {
 async function getByTeacher(teacherId: number) {
     const teacher = await teacherRepository.getOneWithExams(teacherId);
 
-    return teacher[0].exams.map((exam) => {
-        return {
-            name: exam.name,
-            type: exam.typeId,
-            link: exam.link,
-            year: exam.year.year,
-            semester: exam.semesterId,
-        };
-    });
+    return teacher[0].exams.map((exam) => exam.getExam());
 }
 
 export { create, getByTeacher };

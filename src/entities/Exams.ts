@@ -7,6 +7,8 @@ import {
 } from "typeorm";
 
 import Year from "./Years";
+import Semester from "./Semesters";
+import Type from "./Types";
 
 @Entity("exams")
 export default class Exam {
@@ -35,6 +37,21 @@ export default class Exam {
     @JoinColumn({ name: "year_id" })
     year: Year;
 
-    // @ManyToOne(() => TeacherSubject, (teacherSubject) => teacherSubject.exams)
-    // teacherSubject: TeacherSubject;
+    @OneToOne(() => Semester, { eager: true })
+    @JoinColumn({ name: "semester_id" })
+    semester: Semester;
+
+    @OneToOne(() => Type, { eager: true })
+    @JoinColumn({ name: "type_id" })
+    type: Type;
+
+    getExam() {
+        return {
+            name: this.name,
+            link: this.link,
+            type: this.type.name,
+            semester: this.semester.semester,
+            year: this.year.year,
+        };
+    }
 }

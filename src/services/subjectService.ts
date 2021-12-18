@@ -6,4 +6,10 @@ async function getAll() {
     return subjects.map((subject) => subject.getSubjectWithExamAmount());
 }
 
-export { getAll };
+async function getOne(subjectId: number) {
+    const subjectFound = await subjectRepository.findOne(subjectId);
+
+    return subjectFound.exams.map((exam) => exam.getExamWithTeacher());
+}
+
+export { getAll, getOne };

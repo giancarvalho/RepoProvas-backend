@@ -11,4 +11,20 @@ async function getAll(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-export { getAll };
+async function getOne(req: Request, res: Response, next: NextFunction) {
+    const { subjectId } = req.params;
+    try {
+        const id = Number(subjectId);
+
+        if (!id) {
+            return res.sendStatus(400);
+        }
+        const getSubjectRequest = await subjectService.getOne(id);
+
+        res.send(getSubjectRequest);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { getAll, getOne };

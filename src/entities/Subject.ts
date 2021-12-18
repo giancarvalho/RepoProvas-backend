@@ -56,6 +56,7 @@ export default class Subject {
 
     getSubjectWithExamAmount() {
         return {
+            id: this.id,
             name: this.name,
             semester: this.semester.semester,
             exams: this.exams.length,

@@ -71,6 +71,7 @@ export default class Exam {
 
     getExamWithSubject() {
         return {
+            id: this.id,
             name: this.name,
             link: this.link,
             type: this.type.name,
@@ -81,6 +82,7 @@ export default class Exam {
 
     getExamWithTeacher() {
         return {
+            id: this.id,
             name: this.name,
             link: this.link,
             type: this.type.name,

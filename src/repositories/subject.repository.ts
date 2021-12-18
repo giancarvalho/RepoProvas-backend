@@ -9,4 +9,13 @@ async function getAll() {
     return result;
 }
 
-export { getAll };
+async function findOne(subjectId: number) {
+    const result = await getRepository(Subject).findOne({
+        where: { id: subjectId },
+        relations: ["exams", "exams.teacher"],
+    });
+
+    return result;
+}
+
+export { getAll, findOne };

@@ -4,11 +4,15 @@ import {
     Column,
     OneToOne,
     JoinColumn,
+    ManyToMany,
+    JoinTable,
+    ManyToOne,
 } from "typeorm";
 
 import Year from "./Years";
 import Semester from "./Semesters";
 import Type from "./Types";
+import Subject from "./Subject";
 
 @Entity("exams")
 export default class Exam {
@@ -45,6 +49,20 @@ export default class Exam {
     @JoinColumn({ name: "type_id" })
     type: Type;
 
+    @ManyToMany(() => Subject, (subject) => subject.id, { eager: true })
+    @JoinTable({
+        name: "teachers_subjects",
+        joinColumn: {
+            name: "id",
+            referencedColumnName: "teacherSubjectId",
+        },
+        inverseJoinColumn: {
+            name: "subject_id",
+            referencedColumnName: "id",
+        },
+    })
+    subject: Subject[];
+
     getExam() {
         return {
             name: this.name,
@@ -52,6 +70,7 @@ export default class Exam {
             type: this.type.name,
             semester: this.semester.semester,
             year: this.year.year,
+            subject: this.subject[0].name,
         };
     }
 }

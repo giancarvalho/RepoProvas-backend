@@ -6,7 +6,6 @@ function createFakeExam() {
         name: faker.lorem.words(),
         link: faker.internet.url(),
         typeId: 2,
-        semesterId: 2,
         yearId: 2,
         teacherSubjectId: 2,
     };

@@ -22,9 +22,15 @@ async function create(examData: iExam) {
 }
 
 async function getByTeacher(teacherId: number) {
-    const teacher = await teacherRepository.getOneWithExams(teacherId);
+    const findTeacherRequest = await teacherRepository.getOneWithExams(
+        teacherId
+    );
 
-    return teacher[0].exams.map((exam) => exam.getExam());
+    const teacher = findTeacherRequest[0];
+    return {
+        name: teacher.name,
+        exams: teacher.exams.map((exam) => exam.getExam()),
+    };
 }
 
 export { create, getByTeacher };

@@ -6,7 +6,6 @@ import {
     JoinColumn,
     ManyToMany,
     JoinTable,
-    ManyToOne,
 } from "typeorm";
 
 import Year from "./Years";

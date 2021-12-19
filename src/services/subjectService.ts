@@ -15,4 +15,16 @@ async function getOne(subjectId: number) {
     };
 }
 
-export { getAll, getOne };
+async function getAllWithTeachers() {
+    const subjects = await subjectRepository.getAllWithTeachers();
+
+    return subjects.map((subject) => {
+        return {
+            id: subject.id,
+            name: subject.name,
+            teachers: subject.teachers,
+        };
+    });
+}
+
+export { getAll, getOne, getAllWithTeachers };

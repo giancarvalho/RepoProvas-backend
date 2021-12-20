@@ -3,7 +3,7 @@ import { getConnection, getRepository } from "typeorm";
 
 import app, { init } from "../../src/app";
 
-import getASubject from "../factories/subjectFactory";
+import getASubject from "../factories/subject.factory";
 
 beforeAll(async () => {
     await init();

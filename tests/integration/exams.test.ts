@@ -2,11 +2,11 @@ import supertest from "supertest";
 import { getConnection } from "typeorm";
 
 import app, { init } from "../../src/app";
-import { createFakeExam, createFakeDBExam } from "../factories/examFactory";
+import { createFakeExam, createFakeDBExam } from "../factories/exam.factory";
 
 import { clearDatabase } from "../utils/database";
 import * as examRepository from "../../src/repositories/exam.repository";
-import getATeacher from "../factories/teacherFactory";
+import getATeacher from "../factories/teacher.factory";
 
 beforeAll(async () => {
     await init();

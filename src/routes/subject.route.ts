@@ -1,5 +1,5 @@
 import express from "express";
-import * as subjectController from "../controllers/subjectController";
+import * as subjectController from "../controllers/subject.controller";
 
 const subjectRoute = express.Router();
 

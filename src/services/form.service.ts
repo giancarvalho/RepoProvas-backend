@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import * as subjectService from "../services/subjectService";
+import * as subjectService from "./subject.service";
 import Year from "../entities/Years";
 import Type from "../entities/Types";
 

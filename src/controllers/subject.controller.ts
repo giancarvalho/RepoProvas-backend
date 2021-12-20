@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import * as subjectService from "../services/subjectService";
+import * as subjectService from "../services/subject.service";
 
 async function getAll(req: Request, res: Response, next: NextFunction) {
     try {

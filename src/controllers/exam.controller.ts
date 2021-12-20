@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import * as examService from "../services/examService";
+import * as examService from "../services/exam.service";
 
 async function postExam(req: Request, res: Response, next: NextFunction) {
     const examData = req.body;

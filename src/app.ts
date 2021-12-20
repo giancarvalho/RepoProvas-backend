@@ -5,9 +5,9 @@ import cors from "cors";
 import "reflect-metadata";
 import handleErrors from "./middlewares/handleError.middeware";
 import connectDatabase from "./database";
-import examRoute from "./routes/examRoute";
-import teacherRoute from "./routes/teacherRoute";
-import subjectRoute from "./routes/subjectRoute";
+import examRoute from "./routes/exam.route";
+import teacherRoute from "./routes/teacher.route";
+import subjectRoute from "./routes/subject.route";
 import formRoute from "./routes/form.route";
 
 const app = express();

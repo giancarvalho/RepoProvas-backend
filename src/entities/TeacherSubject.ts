@@ -1,28 +1,17 @@
-import {
-    Entity,
-    PrimaryGeneratedColumn,
-    OneToMany,
-    ManyToOne,
-    JoinColumn,
-    JoinTable,
-} from "typeorm";
-import Exam from "./Exams";
-import Teacher from "./Teachers";
-import Subject from "./Subject";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("teachers_subjects")
 export default class TeacherSubject {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Teacher, (teacher) => teacher.id)
-    @JoinColumn({ name: "teacher_id" })
-    teacher: Teacher;
+    @Column({ name: "teacher_id" })
+    teacherId: number;
 
-    // @OneToMany(() => Exam, (exam) => exam.teacherSubject, { eager: true })
-    // @JoinColumn({ name: "teachers_subjects_id" })
-    // exams: Exam[];
+    @Column({ name: "subject_id" })
+    subjectId: number;
 
-    // @ManyToOne(() => Subject, (Subject) => Subject.id)
-    // subject: Subject;
+    // @ManyToOne(() => Teacher, (teacher) => teacher.id)
+    // @JoinColumn({ name: "teacher_id" })
+    // teacher: Teacher;
 }

@@ -1,8 +1,8 @@
 import { getRepository } from "typeorm";
 import Exam from "../entities/Exams";
-import { iExam } from "../protocols/exams.interface";
+import { iExamDB } from "../protocols/exams.interface";
 
-async function insert(examData: iExam) {
+async function insert(examData: iExamDB) {
     const result = await getRepository(Exam).insert(examData);
 
     return result.raw;

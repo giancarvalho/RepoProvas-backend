@@ -9,6 +9,14 @@ async function getAll() {
     return result;
 }
 
+async function getAllWithTeachers() {
+    const result = await getRepository(Subject).find({
+        relations: ["teachers"],
+    });
+
+    return result;
+}
+
 async function findOne(subjectId: number) {
     const result = await getRepository(Subject).findOne({
         where: { id: subjectId },
@@ -18,4 +26,4 @@ async function findOne(subjectId: number) {
     return result;
 }
 
-export { getAll, findOne };
+export { getAll, findOne, getAllWithTeachers };

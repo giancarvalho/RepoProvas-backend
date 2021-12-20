@@ -1,10 +1,8 @@
 import supertest from "supertest";
 import { getConnection, getRepository } from "typeorm";
-import faker from "faker";
 
 import app, { init } from "../../src/app";
-import Subject from "../../src/entities/Subject";
-import { iSubjectTeachersDB } from "../../src/protocols/subjects.interface";
+
 import getASubject from "../factories/subjectFactory";
 
 beforeAll(async () => {

@@ -5,7 +5,8 @@ const examSchema = Joi.object({
     link: Joi.string().min(5).required(),
     typeId: Joi.number().min(1).required(),
     yearId: Joi.number().min(1).required(),
-    teacherSubjectId: Joi.number().min(1).required(),
+    subjectId: Joi.number().min(1).required(),
+    teacherId: Joi.number().min(1).required(),
 });
 
 export default examSchema;

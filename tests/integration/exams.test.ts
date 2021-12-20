@@ -2,7 +2,7 @@ import supertest from "supertest";
 import { getConnection } from "typeorm";
 
 import app, { init } from "../../src/app";
-import createFakeExam from "../factories/examFactory";
+import { createFakeExam, createFakeDBExam } from "../factories/examFactory";
 
 import { clearDatabase } from "../utils/database";
 import * as examRepository from "../../src/repositories/exam.repository";
@@ -21,7 +21,7 @@ afterAll(async () => {
 });
 
 describe("POST /exams", () => {
-    const conflictingExam = createFakeExam();
+    const conflictingExam = createFakeDBExam();
 
     beforeAll(async () => {
         await examRepository.insert({ ...conflictingExam });
@@ -46,9 +46,11 @@ describe("POST /exams", () => {
     });
 
     it("should answer with status 409 if exam is already registered", async () => {
-        const response = await supertest(app)
-            .post("/exams")
-            .send(conflictingExam);
+        const fakeExam = createFakeExam();
+        fakeExam.name = conflictingExam.name;
+        fakeExam.link = conflictingExam.link;
+
+        const response = await supertest(app).post("/exams").send(fakeExam);
 
         expect(response.status).toBe(409);
     });

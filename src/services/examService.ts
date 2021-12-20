@@ -1,8 +1,10 @@
 import examSchema from "../schemas/exam.schema";
 import { BadRequest, Conflict } from "../utils/Errors";
-import { iExam } from "../protocols/exams.interface";
+import { iExam, iExamDB } from "../protocols/exams.interface";
 import * as examRepository from "../repositories/exam.repository";
 import * as teacherRepository from "../repositories/teacher.repository";
+import { getRepository } from "typeorm";
+import TeacherSubject from "../entities/TeacherSubject";
 
 async function create(examData: iExam) {
     const { error } = examSchema.validate(examData);
@@ -18,7 +20,22 @@ async function create(examData: iExam) {
         throw new Conflict("Exam is already registered");
     }
 
-    return examRepository.insert(examData);
+    const teacherSubjectSearch = await getRepository(TeacherSubject).findOne({
+        where: [
+            { teacherId: examData.teacherId },
+            { subjectId: examData.subjectId },
+        ],
+    });
+
+    const examDataDB = {
+        name: examData.name,
+        link: examData.link,
+        typeId: examData.typeId,
+        yearId: examData.yearId,
+        teacherSubjectId: teacherSubjectSearch.id,
+    } as iExamDB;
+
+    return examRepository.insert(examDataDB);
 }
 
 async function getByTeacher(teacherId: number) {

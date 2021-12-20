@@ -13,11 +13,13 @@ afterAll(async () => {
     await getConnection().close();
 });
 
-describe("GET /subjects/:subjectId", () => {
+describe("GET /subjects/:subjectId/exams", () => {
     it("should return an object with an array of exams", async () => {
         const subject = await getASubject();
 
-        const response = await supertest(app).get(`/subjects/${subject.id}`);
+        const response = await supertest(app).get(
+            `/subjects/${subject.id}/exams`
+        );
 
         expect(response.body).toHaveProperty("name");
         expect(response.body).toHaveProperty("exams");

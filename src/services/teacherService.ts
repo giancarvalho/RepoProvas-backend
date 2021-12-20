@@ -18,4 +18,16 @@ async function getAll() {
     });
 }
 
-export { getBySubject, getAll };
+async function getExams(teacherId: number) {
+    const findTeacherRequest = await teacherRepository.getOneWithExams(
+        teacherId
+    );
+
+    const teacher = findTeacherRequest[0];
+    return {
+        name: teacher.name,
+        exams: teacher.exams.map((exam) => exam.getExamWithSubject()),
+    };
+}
+
+export { getBySubject, getAll, getExams };

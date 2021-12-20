@@ -29,4 +29,26 @@ async function getTeachers(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-export { getTeachersBySubject, getTeachers };
+async function getTeacherExams(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const { teacherId } = req.params;
+
+    try {
+        const id = Number(teacherId);
+
+        if (!id) {
+            return res.sendStatus(400);
+        }
+
+        const getExamsRequest = await teacherService.getExams(id);
+
+        res.send(getExamsRequest);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { getTeachersBySubject, getTeachers, getTeacherExams };

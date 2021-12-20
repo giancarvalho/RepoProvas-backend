@@ -1,8 +1,7 @@
 import supertest from "supertest";
-import { getConnection, getRepository } from "typeorm";
+import { getConnection } from "typeorm";
 
 import app, { init } from "../../src/app";
-import getASubject from "../factories/subject.factory";
 
 beforeAll(async () => {
     await init();

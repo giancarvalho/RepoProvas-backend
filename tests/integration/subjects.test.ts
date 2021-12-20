@@ -14,7 +14,7 @@ afterAll(async () => {
 });
 
 describe("GET /subjects/:subjectId", () => {
-    it("should return an object with an array of teachers", async () => {
+    it("should return an object with an array of exams", async () => {
         const subject = await getASubject();
 
         const response = await supertest(app).get(`/subjects/${subject.id}`);
